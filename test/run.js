@@ -1,13 +1,14 @@
-const {
-  testCrc32Table,
-  testCrc32cTable
-} = require('./js/table.test')
+const fs = require('fs')
+const path = require('path')
 
 let testCount = 0
 
-testCrc32Table()
-testCount++
-testCrc32cTable()
-testCount++
+fs.readdirSync(path.join(__dirname, 'js')).forEach(file => {
+  const testFile = require(`./js/${file}`)
+  Object.keys(testFile).forEach(name => {
+    testFile[name]()
+    testCount++
+  })
+})
 
 console.log(`${testCount} passed`)
