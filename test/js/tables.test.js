@@ -1,7 +1,7 @@
 const {
   crc32,
   crc32c
-} = require('../../src/js/table')
+} = require('../../src/js/tables')
 
 const crc32Table = require('../fixtures/crc32Table')
 const crc32cTable = require('../fixtures/crc32cTable')
