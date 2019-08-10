@@ -42,13 +42,16 @@ describe('crc32', () => {
     it('is faster than zlib', done => {
       const input = createInput(100);
       (new Benchmark.Suite)
-        .add('zlib', function() {
+        .add('zlib', () => {
           zlib(input)
         })
-        .add('rapid', function() {
+        .add('rapid', () => {
           crc32(input)
         })
-        .on('complete', function() {
+        .on('cycle', event => {
+          console.log(String(event.target))
+        })
+        .on('complete', function () {
           expect(this.filter('fastest').map('name')[0]).toEqual('rapid')
           done()
         })

@@ -25,7 +25,24 @@ function generateTable(poly) {
   return crc_table
 }
 
+function generateLookup(poly, size = 8) {
+  const lookup = new Array(size)
+  lookup[0] = generateTable(poly)
+
+  for (let i = 1; i < size; i++) { 
+    lookup[i] = new Uint32Array(256)
+
+    for (let j = 0; j < 256; j++) {
+      lookup[i][j] = lookup[0][lookup[i - 1][j] & 0xff] ^ (lookup[i - 1][j] >>> 8)
+    }
+  }
+
+  return lookup
+}
+
 module.exports = {
-  crc32: generateTable(0xEDB88320),
-  crc32c: generateTable(0x82F63B78)
+  crc32Table: generateTable(0xEDB88320),
+  crc32cTable: generateTable(0x82F63B78),
+  crc32Lookup: generateLookup(0xEDB88320),
+  crc32cLookup: generateLookup(0x82F63B78)
 }

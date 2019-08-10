@@ -1,4 +1,4 @@
-const tables = require('../../src/js/tables')
+const { crc32Table, crc32Lookup, crc32cTable } = require('../../src/js/tables')
 
 function calc (table) {
   return function (buf, crc = 0) {
@@ -21,7 +21,33 @@ function calc (table) {
   }
 }
 
+function calc32 (lookup) {
+  return function (buf, crc) {
+    crc = ~crc
+    let i = 0
+    for (; i < buf.length-8; i += 8) {
+      const one = buf.readUInt32LE(i) ^ crc
+      const two = buf.readUInt32LE(i + 4)
+
+      crc = lookup[4][one >>> 24] ^
+        lookup[0][two >>> 24] ^
+        lookup[5][(one >>> 16) & 0xff] ^
+        lookup[1][(two >>> 16) & 0xff] ^
+        lookup[6][(one >>> 8) & 0xff] ^
+        lookup[2][(two >>> 8) & 0xff] ^
+        lookup[7][one & 0xff] ^
+        lookup[3][two & 0xff]
+    }
+
+    for (let j = i; j < buf.length; j++) {
+      crc = lookup[0][(crc ^ buf[j]) & 0xff] ^ (crc >>> 8)
+    }
+
+    return ~crc >>> 0
+  }
+}
+
 module.exports = {
-  crc32: calc(tables.crc32),
-  crc32c: calc(tables.crc32c)
+  crc32: calc32(crc32Lookup),
+  crc32c: calc(crc32cTable)
 }

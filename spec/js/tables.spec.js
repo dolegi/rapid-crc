@@ -1,20 +1,20 @@
 const {
-  crc32,
-  crc32c
+  crc32Table,
+  crc32cTable
 } = require('../../src/js/tables')
 
-const crc32Table = require('../fixtures/crc32Table')
-const crc32cTable = require('../fixtures/crc32cTable')
+const crc32TableFixture = require('../fixtures/crc32Table')
+const crc32cTableFixture = require('../fixtures/crc32cTable')
 
 describe('crc32 table', () => {
   it('creates the expected tabled', () => {
-    expect(crc32).toEqual(crc32Table)
+    expect(crc32Table).toEqual(crc32TableFixture)
   })
 })
 
 describe('crc32c table', () => {
   it('creates the expected tabled', () => {
-    expect(crc32c).toEqual(crc32cTable)
+    expect(crc32cTable).toEqual(crc32cTableFixture)
   })
 })
 
