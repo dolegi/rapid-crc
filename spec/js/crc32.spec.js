@@ -1,3 +1,5 @@
+const Benchmark = require('benchmark')
+
 const { crc32 } = require('../../src/js/crc32')
 const { zlib } = require('../../build/Release/rapid_crc.node')
 const createInput = require('../helpers/createInput')
@@ -25,10 +27,32 @@ describe('crc32', () => {
     })
 
     it('matches with starting crc value', () => {
-      const input = createInput(100000)
+      const input = createInput(10000)
       const crc = 0xfe561729
 
       expect(crc32(input, crc)).toEqual(zlib(input, crc))
+    })
+  })
+
+  describe('performance', () => {
+    beforeEach(() => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+    })
+
+    it('is faster than zlib', done => {
+      const input = createInput(100);
+      (new Benchmark.Suite)
+        .add('zlib', function() {
+          zlib(input)
+        })
+        .add('rapid', function() {
+          crc32(input)
+        })
+        .on('complete', function() {
+          expect(this.filter('fastest').map('name')[0]).toEqual('rapid')
+          done()
+        })
+        .run({ 'async': true })
     })
   })
 })
