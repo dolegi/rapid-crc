@@ -4,10 +4,14 @@ Release/obj.target/rapid_crc/src/cc/main.o: ../src/cc/main.cc \
   /Users/domginger/.node-gyp/10.16.1/include/node/node_api.h \
   /Users/domginger/.node-gyp/10.16.1/include/node/node_api_types.h \
   /Users/domginger/Development/rapid-crc/node_modules/node-addon-api/napi-inl.h \
-  /Users/domginger/Development/rapid-crc/node_modules/node-addon-api/napi-inl.deprecated.h
+  /Users/domginger/Development/rapid-crc/node_modules/node-addon-api/napi-inl.deprecated.h \
+  /Users/domginger/.node-gyp/10.16.1/include/node/zlib.h \
+  /Users/domginger/.node-gyp/10.16.1/include/node/zconf.h
 ../src/cc/main.cc:
 /Users/domginger/Development/rapid-crc/node_modules/node-addon-api/napi.h:
 /Users/domginger/.node-gyp/10.16.1/include/node/node_api.h:
 /Users/domginger/.node-gyp/10.16.1/include/node/node_api_types.h:
 /Users/domginger/Development/rapid-crc/node_modules/node-addon-api/napi-inl.h:
 /Users/domginger/Development/rapid-crc/node_modules/node-addon-api/napi-inl.deprecated.h:
+/Users/domginger/.node-gyp/10.16.1/include/node/zlib.h:
+/Users/domginger/.node-gyp/10.16.1/include/node/zconf.h:
