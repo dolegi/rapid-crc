@@ -49,5 +49,5 @@ function calc32 (lookup) {
 
 module.exports = {
   crc32js: calc32(crc32Lookup),
-  crc32c: calc(crc32cTable)
+  crc32cjs: calc(crc32cTable)
 }

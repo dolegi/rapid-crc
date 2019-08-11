@@ -1,11 +1,10 @@
 const Benchmark = require('benchmark')
 
-const { zlib } = require('../build/Release/rapid_crc.node')
-const { crc32 } = require('../src')
-const { crc32js }  = require('../src/js/crc32')
+const { crc32c } = require('../src')
+const { crc32cjs }  = require('../src/js/crc32')
 const createInput = require('../spec/helpers/createInput')
 
-describe('crc32', () => {
+describe('crc32c', () => {
   beforeAll(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
   })
@@ -13,14 +12,11 @@ describe('crc32', () => {
   it('is the fastest', done => {
     const input = createInput(100);
     (new Benchmark.Suite)
-      .add('zlib', () => {
-        zlib(input, -1)
-      })
       .add('rapid', () => {
-        crc32(input)
+        crc32c(input)
       })
       .add('rapidjs', () => {
-        crc32js(input)
+        crc32cjs(input)
       })
       .on('cycle', event => {
         console.log(String(event.target))
