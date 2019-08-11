@@ -13,8 +13,11 @@
   "license": "MIT",
   "devDependencies": {
     "benchmark": "^2.1.4",
+    "crc": "^3.8.0",
+    "crc-32": "^1.2.0",
     "jasmine": "^3.4.0",
     "node-addon-api": "^1.7.1",
-    "node-gyp": "^5.0.3"
+    "node-gyp": "^5.0.3",
+    "turbo-crc32": "^1.0.1"
   }
 }
