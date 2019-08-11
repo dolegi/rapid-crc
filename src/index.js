@@ -1,4 +1,4 @@
-const crc32 = require('js/crc32')
+const { zlib } = require('../build/Release/rapid_crc.node')
 
 module.exports = {
 

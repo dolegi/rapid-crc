@@ -22,6 +22,7 @@ CFLAGS_Debug := \
 	-gdwarf-2 \
 	-mmacosx-version-min=10.7 \
 	-arch x86_64 \
+	-msse4.2 \
 	-Wall \
 	-Wendif-labels \
 	-W \
@@ -72,6 +73,7 @@ CFLAGS_Release := \
 	-gdwarf-2 \
 	-mmacosx-version-min=10.7 \
 	-arch x86_64 \
+	-msse4.2 \
 	-Wall \
 	-Wendif-labels \
 	-W \
@@ -110,9 +112,6 @@ OBJS := \
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
-
-# Make sure our dependencies are built before any of us.
-$(OBJS): | $(builddir)/nothing.a
 
 # CFLAGS et al overrides must be target-local.
 # See "Target-specific Variable Values" in the GNU Make manual.
@@ -171,7 +170,7 @@ $(builddir)/rapid_crc.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(builddir)/rapid_crc.node: LIBS := $(LIBS)
 $(builddir)/rapid_crc.node: GYP_LIBTOOLFLAGS := $(LIBTOOLFLAGS_$(BUILDTYPE))
 $(builddir)/rapid_crc.node: TOOLSET := $(TOOLSET)
-$(builddir)/rapid_crc.node: $(OBJS) $(builddir)/nothing.a FORCE_DO_CMD
+$(builddir)/rapid_crc.node: $(OBJS) FORCE_DO_CMD
 	$(call do_cmd,solink_module)
 
 all_deps += $(builddir)/rapid_crc.node

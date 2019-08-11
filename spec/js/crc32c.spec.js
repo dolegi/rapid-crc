@@ -1,4 +1,4 @@
-const { crc32c } = require('../../src/js/crc32')
+const { crc32c } = require('../../build/Release/rapid_crc.node')
 
 const input = Buffer.from('The quick brown fox jumps over the lazy dog ')
 

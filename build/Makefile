@@ -321,23 +321,13 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.s FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,node_modules/node-addon-api/src/node-api.target.mk)))),)
-  include node_modules/node-addon-api/src/node-api.target.mk
-endif
-ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
-    $(findstring $(join ^,$(prefix)),\
-                 $(join ^,node_modules/node-addon-api/src/nothing.target.mk)))),)
-  include node_modules/node-addon-api/src/nothing.target.mk
-endif
-ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
-    $(findstring $(join ^,$(prefix)),\
                  $(join ^,rapid_crc.target.mk)))),)
   include rapid_crc.target.mk
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
 cmd_regen_makefile = cd $(srcdir); /Users/domginger/.fnm/node-versions/v10.16.1/installation/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/domginger/Development/rapid-crc/build/config.gypi -I/Users/domginger/.fnm/node-versions/v10.16.1/installation/lib/node_modules/npm/node_modules/node-gyp/addon.gypi -I/Users/domginger/.node-gyp/10.16.1/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/domginger/.node-gyp/10.16.1" "-Dnode_gyp_dir=/Users/domginger/.fnm/node-versions/v10.16.1/installation/lib/node_modules/npm/node_modules/node-gyp" "-Dnode_lib_file=/Users/domginger/.node-gyp/10.16.1/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/domginger/Development/rapid-crc" "-Dnode_engine=v8" binding.gyp
-Makefile: $(srcdir)/../../.node-gyp/10.16.1/include/node/common.gypi $(srcdir)/node_modules/node-addon-api/src/node_api.gyp $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../.fnm/node-versions/v10.16.1/installation/lib/node_modules/npm/node_modules/node-gyp/addon.gypi
+Makefile: $(srcdir)/../../.node-gyp/10.16.1/include/node/common.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../.fnm/node-versions/v10.16.1/installation/lib/node_modules/npm/node_modules/node-gyp/addon.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

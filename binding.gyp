@@ -10,12 +10,9 @@
 					'include_dirs': [
 						"<!@(node -p \"require('node-addon-api').include\")"
 					],
-					"cflags!": [ "-fno-exceptions" ],
-					"cflags_cc!": [ "-fno-exceptions" ],
-					'libraries': [],
-					'dependencies': [
-						"<!(node -p \"require('node-addon-api').gyp\")"
-					],
+					"xcode_settings": {
+						"GCC_ENABLE_SSE42_EXTENSIONS": "YES"
+					},
 					'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ]
 				}
 			]
