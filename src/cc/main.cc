@@ -56,10 +56,9 @@ Napi::Number crcZlib(const Napi::CallbackInfo& info) {
 Napi::Number crc32c(const Napi::CallbackInfo& info) {
 	Napi::Buffer<unsigned char> buf = info[0].As<Napi::Buffer<unsigned char>>();
 	uint32_t crc = ~(uint32_t) info[1].As<Napi::Number>();
-	unsigned char* data = buf.Data();
 	size_t length = buf.Length();
 
-	uint64_t* data64 = (uint64_t *) data;
+	uint64_t* data64 = (uint64_t *) buf.Data();
 	while (length >= 8) {
 		crc = _mm_crc32_u64(crc, *data64++);
 		length -= 8;
