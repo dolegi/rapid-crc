@@ -5,7 +5,7 @@ function validateInput (fn) {
 		if (!buf instanceof Buffer) {
 			try {
 				buf = Buffer.from(buf)
-			} catch () {
+			} catch (err) {
 				throw Error('Invalid input, expected instance of Buffer')
 			}
 		}
@@ -13,12 +13,11 @@ function validateInput (fn) {
 			throw Error('Invalid crc value, expected number')
 		}
 
-		fn(buf, crc);
+		return fn(buf, crc);
 	}
 }
 
 module.exports = {
-	validateInput(crc32),
-	validateInput(crc32c)
-
+	crc32: validateInput(crc32),
+	crc32c: validateInput(crc32c)
 }

@@ -140,7 +140,7 @@ Napi::Number crc32By32(const Napi::CallbackInfo& info) {
 }
 
 Napi::Object init(Napi::Env env, Napi::Object exports) {
-  createLookup(0x82F63B78, lookup32);
+  createLookup(0xEDB88320, lookup32);
 	exports.Set("crc32c", Napi::Function::New(env, crc32c));
 	exports.Set("crc32", Napi::Function::New(env, crc32By32));
 	exports.Set("zlib", Napi::Function::New(env, crcZlib));

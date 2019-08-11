@@ -1,12 +1,15 @@
 const Benchmark = require('benchmark')
-const { crc32c } = require('../build/Release/rapid_crc.node')
+const { crc32, crc32c } = require('../src')
 
-const input = Buffer.from('The quick brown fox jumps over the lazy dog ')
-console.log(crc32c(input).toString(16))
+const inp = Buffer.from('The quick brown fox jumps over the lazy dog ')
+console.log(crc32c(inp).toString(16))
+
+const input = generateInput(1000)
 
 const suite = new Benchmark.Suite
 suite
 .add('crc32c', () => crc32c(input))
+.add('crc32', () => crc32(input))
 .on('cycle', function(event) {
   console.log(String(event.target))
 })
@@ -20,5 +23,5 @@ function generateInput(size) {
   for (let i = 0; i < size; i++) {
     input += Math.random().toString(16).substr(2)
   }
-  return input
+  return Buffer.from(input)
 }
