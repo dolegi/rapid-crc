@@ -1,15 +1,17 @@
 const Benchmark = require('benchmark')
-const { crc32, crc32c } = require('../src')
 
-const inp = Buffer.from('The quick brown fox jumps over the lazy dog ')
-console.log(crc32c(inp).toString(16))
+const { crc32c } = require('../src')
+const sheetjs = require('crc-32') 
+const turbo = require('turbo-crc32/crc32c')
+const sse4_crc32 = require('sse4_crc32')
 
-const input = generateInput(1000)
+const input = generateInput(100)
 
 const suite = new Benchmark.Suite
 suite
-.add('crc32c', () => crc32c(input))
-.add('crc32', () => crc32(input))
+.add('rapid-crc', () => crc32c(input))
+.add('turbo', () => turbo(input))
+.add('sse4_crc32', () => sse4_crc32.calculate(input))
 .on('cycle', function(event) {
   console.log(String(event.target))
 })

@@ -7,7 +7,7 @@ const createInput = require('../spec/helpers/createInput')
 const { zlib } = require('../build/Release/rapid_crc.node')
 const sheetjs = require('crc-32') 
 const crc = require('crc')
-const turbo = require('turbo-crc32/crc32c')
+const turbo = require('turbo-crc32/crc32')
 
 describe('crc32', () => {
   beforeAll(() => {
