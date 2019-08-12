@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/dolegi/rapid-crc.svg?branch=master)](https://travis-ci.org/dolegi/rapid-crc)
 # Rapid CRC
-Aims to be the fastest crc32 and crc32c implemenations on npm
+The fastest crc32 and crc32c implemenations on npm
 
 ### Install
 ```bash
