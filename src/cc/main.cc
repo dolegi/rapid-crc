@@ -2,6 +2,24 @@
 #include <zlib.h>
 #include <x86intrin.h>
 
+// Check windows
+#if _WIN32 || _WIN64
+  #if _WIN64
+    #define ENV64BIT
+  #else
+    #define ENV32BIT
+  #endif
+#endif
+
+// Check GCC
+#if __GNUC__
+  #if __x86_64__ || __ppc64__
+    #define ENV64BIT
+  #else
+    #define ENV32BIT
+  #endif
+#endif
+
 uint32_t lookup32[32][256];
 
 void createLookup(uint32_t polynomial, uint32_t lookup[32][256]) {
@@ -58,12 +76,16 @@ Napi::Number crc32c(const Napi::CallbackInfo& info) {
 	uint32_t crc = ~(uint32_t) info[1].As<Napi::Number>();
 	size_t length = buf.Length();
 
+#if defined(ENV64BIT)
 	uint64_t* data64 = (uint64_t *) buf.Data();
 	while (length >= 8) {
 		crc = _mm_crc32_u64(crc, *data64++);
 		length -= 8;
 	}
 	uint32_t* data32 = (uint32_t *) data64;
+#elif defined (ENV32BIT)
+	uint32_t* data32 = (uint32_t *) buf.Data();
+#endif
 	while (length >= 4) {
 		crc = _mm_crc32_u32(crc, *data32++);
 		length -= 4;
