@@ -1,7 +1,7 @@
-const { zlib, crc32, crc32c } = require('../build/Release/rapid_crc.node')
+const { crc32, crc32c } = require('../build/Release/rapid_crc.node')
 
 function validateInput (fn) {
-	return function (buf, crc = -1) {
+	return function (buf, crc = 0) {
 		if (!buf instanceof Buffer) {
 			try {
 				buf = Buffer.from(buf)

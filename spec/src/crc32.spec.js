@@ -9,7 +9,7 @@ const input = Buffer.from('The quick brown fox jumps over the lazy dog ')
 
 describe('crc32', () => {
   it('creates the expected output', () => {
-    const expected = 3404960013
+    const expected = 3056077038
     const actual = crc32(input)
     expect(actual).toEqual(expected)
   })
@@ -22,13 +22,13 @@ describe('crc32', () => {
     it('matches small input', () => {
       const input = createInput(10)
 
-      expect(crc32(input)).toEqual(zlib(input, -1))
+      expect(crc32(input)).toEqual(zlib(input, 0))
     })
 
     it('matches large input', () => {
       const input = createInput(1000000)
 
-      expect(crc32(input)).toEqual(zlib(input, -1))
+      expect(crc32(input)).toEqual(zlib(input, 0))
     })
 
     it('matches with starting crc value', () => {

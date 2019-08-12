@@ -1,7 +1,7 @@
 const { crc32Table, crc32Lookup, crc32cTable } = require('../../src/js/tables')
 
 function calc (table) {
-  return function (buf, crc = -1) {
+  return function (buf, crc = 0) {
     let i = 0, c = crc ^ -1;
     while (i < buf.length-8) {
       c = table[(c ^ buf[i++]) & 0xff] ^ (c >>> 8);
@@ -22,7 +22,7 @@ function calc (table) {
 }
 
 function calc32 (lookup) {
-  return function (buf, crc = -1) {
+  return function (buf, crc = 0) {
     crc = ~crc
     let i = 0
     for (; i < buf.length-8; i += 8) {
