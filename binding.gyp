@@ -10,6 +10,7 @@
 					'include_dirs': [
 						"<!@(node -p \"require('node-addon-api').include\")"
 					],
+					"cflags":         [ "-msse4.2" ],
 					"xcode_settings": {
 						"GCC_ENABLE_SSE42_EXTENSIONS": "YES"
 					},
