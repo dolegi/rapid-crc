@@ -13,16 +13,10 @@ describe('crc32c', () => {
 
 	it('is the fastest', done => {
 		const input = createInput(100);
-		const suite = (new Benchmark.Suite)
+		(new Benchmark.Suite)
 			.add('rapid', () => crc32c(input))
 			.add('rapidjs', () => crc32cjs(input))
 			.add('turbo', () => turbo(input))
-
-		if (parseInt(process.versions.node) <= 11) {
-			const sse4 = require('sse4_crc32')
-			suite.add('sse4', () => sse4.calculate(input))
-		}
-		suite
 			.on('cycle', event => {
 				console.log(String(event.target))
 			})
