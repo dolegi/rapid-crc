@@ -1,15 +1,16 @@
 {
 	"name": "rapid-crc",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "",
 	"main": "src/index.js",
+	"files": ["src", "binding.gyp"],
 	"scripts": {
 		"build": "node-gyp rebuild",
 		"test": "jasmine",
 		"perf:test": "jasmine performance/*.spec.js"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": ["crc", "crc32", "crc32c"],
+	"author": "dolegi",
 	"license": "MIT",
 	"dependencies": {
 		"node-addon-api": "^1.7.1"
