@@ -23,7 +23,7 @@ const crc2 = rapidCrc.crc32c(Buffer.from('123'))
 Uses slice-by-32 (based on slice-by-8 by intel and slice-by-16 by stehpan brumme). Increasing the size of the lookup to 32 gave the best performance on my machine (2015 macbook pro, i5, 8GB), by 64 > was slower. I think this is due to the amount of data being loaded per cache-line.
 
 #### crc32c (Castagnoli)
-Uses [SSE4.2](https://en.wikipedia.org/wiki/SSE4#SSE4.2) if supported or falls back to slice-by-32.
+Uses [SSE4.2](https://en.wikipedia.org/wiki/SSE4#SSE4.2).
 
 ### Performance
 #### crc32
